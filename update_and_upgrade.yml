@@ -2,16 +2,17 @@
 
 - hosts: all
   become: true
+  gather_facts: true
   tasks:
 
-  - name: install updates (CentOS)
-    dnf:
-      update_only: no
-      update_cache: yes
-    when: ansible_distribution == "CentOS"
-
-  - name: install updates (ubuntu)
-    apt:
-      upgrade: dist
-      update_cache: yes
-    when: ansibel_distribution == "Ubuntu"
+    - name: update & upgrade packages (Ubuntu)
+      apt:
+        upgrade: dist
+        update_cache: yes
+      when: ansible_distribution == "ubuntu"
+      
+    - name: update & upgrade packages (CentOS)
+      dnf:
+        update_only: yes
+        update_cache: yes
+      when: ansible_distribution == "CentOS"
