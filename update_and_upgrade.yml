@@ -1,0 +1,17 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: install updates (CentOS)
+    dnf:
+      update_only: no
+      update_cache: yes
+    when: ansible_distribution == "CentOS"
+
+  - name: install updates (ubuntu)
+    apt:
+      upgrade: dist
+      update_cache: yes
+    when: ansibel_distribution == "Ubuntu"
