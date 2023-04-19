@@ -1,10 +1,8 @@
 ---
-
 - hosts: all
   become: true
   gather_facts: true
   tasks:
-
     - name: install mariadb package (Ubuntu)
       apt:
         name: mariadb-server
@@ -16,4 +14,3 @@
         name: mariadb
         state: latest
       when: ansible_distribution == "CentOS"
-
