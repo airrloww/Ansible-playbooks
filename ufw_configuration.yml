@@ -1,0 +1,35 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: enable firewall
+      ufw:
+        state: enabled
+
+    - name: allow SSH default port
+      ufw:
+        rule: allow
+        port: 22
+        proto: tcp
+
+    - name: allow HTTP default port
+      ufw:
+        rule: allow
+        port: 80
+        proto: tcp
+
+    - name: allow HTTPS default port
+      ufw:
+        rule: allow
+        port: 443
+        proto: tcp
+
+    - name: deny incoming traffic
+      ufw:
+        default: deny
+        direction: incoming
+
+    - name: allow outgoing traffic
+      ufw:
+        default: allow
+        direction: outgoing

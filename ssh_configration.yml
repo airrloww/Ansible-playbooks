@@ -1,0 +1,38 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: change default SSH port to 2222
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?Port'
+        line: 'Port 2222'
+
+    - name: set PermitRootLogin to no
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?PermitRootLogin'
+        line: 'PermitRootLogin no'
+
+    - name: set PubkeyAuthentication to yes
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?PubkeyAuthentication'
+        line: 'PubkeyAuthentication yes'
+
+    - name: set PasswordAuthentication to no
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?PasswordAuthentication'
+        line: 'PasswordAuthentication no'
+
+    - name: allow port 2222 for SSH
+      ufw:
+        rule: allow
+        port: 2222
+        proto: tcp
+
+    - name: restart SSH service
+      service:
+        name: sshd
+        state: restarted
