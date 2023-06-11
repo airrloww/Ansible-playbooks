@@ -1,0 +1,31 @@
+---
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: update repository index (Ubuntu)
+    tags: always
+    apt:
+      update_cache: yes
+    changed_when: false
+    when: ansible_distribution == "Ubuntu"
+
+  - hosts: all
+    become: true
+    roles:
+      - ufw
+
+  - hosts: all
+    become: true
+    roles:
+      - ssh
+
+  - hosts: all
+    become: true
+    roles:
+      - prometheus
+
+  - hosts: all
+    become: true
+    roles:
+      - grafana
