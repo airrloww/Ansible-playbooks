@@ -1,0 +1,28 @@
+- name: install prometheus package
+  apt:
+    name: prometheus
+    state: present
+
+- name: start prometheus service
+  service:
+      name: prometheus
+      state: started
+      enabled: yes
+
+- name: configure Prometheus to listen only on localhost
+  lineinfile:
+    path: /etc/prometheus/prometheus.yml
+    regexp: '^#?listen_address:'
+    line: 'listen_address: 127.0.0.1'
+
+- name: allow prometheus necessary port
+  ufw:
+    rule: allow
+    port: 9090
+    proto: tcp
+
+- name: restart Prometheus service
+  service:
+    name: prometheus
+    state: restarted
+    enabled: yes

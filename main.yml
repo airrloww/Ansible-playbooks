@@ -13,19 +13,4 @@
   - hosts: all
     become: true
     roles:
-      - ufw
-
-  - hosts: all
-    become: true
-    roles:
-      - ssh
-
-  - hosts: all
-    become: true
-    roles:
-      - prometheus
-
-  - hosts: all
-    become: true
-    roles:
-      - grafana
+      - role_name

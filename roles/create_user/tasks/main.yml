@@ -1,0 +1,20 @@
+- name: create user
+  tags: always
+  user:
+    name: user_name
+    groups: group_name
+
+- name: add ssh key for user
+  tags: always
+  authorized_key:
+    user: user_name
+    key: "pub_key"
+
+- name: add sudoers file for user
+  tags: always
+  copy:
+    src: sudoer_user_name
+    dest: /etc/sudoers.d/user_name
+    owner: root
+    group: root
+    mode: 0440
