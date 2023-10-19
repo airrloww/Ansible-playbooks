@@ -2,7 +2,7 @@
   apt:
     upgrade: dist
     update_cache: yes
-  when: ansible_distribution == "ubuntu"
+  when: ansible_distribution == "Ubuntu"
   
 - name: update & upgrade packages (CentOS)
   dnf:
