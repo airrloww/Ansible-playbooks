@@ -1,0 +1,21 @@
+- name: "Add a host with IP address."
+  checkmk.general.host:
+    server_url: "{{ server_url }}"
+    site: "{{ site }}"
+    automation_user: "{{ automation_user }}"
+    automation_secret: "{{ automation_secret }}"
+    name: ""  
+    attributes:
+      alias: ""
+      ipaddress: ""
+    folder: "/"
+    state: "present"
+
+- name: "Add newly discovered services on host."
+  checkmk.general.discovery:
+    server_url: "{{ server_url }}"
+    site: "{{ site }}"
+    automation_user: "{{ automation_user }}"
+    automation_secret: "{{ automation_secret }}"
+    host_name: ""
+    state: "fix_all"
