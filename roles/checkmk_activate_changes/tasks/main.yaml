@@ -1,0 +1,8 @@
+- name: "Activate changes on all sites."
+  checkmk.general.activation:
+    server_url: "{{ server_url }}"
+    site: "{{ site }}"
+    automation_user: "{{ automation_user }}"
+    automation_secret: "{{ automation_secret }}"
+    force_foreign_changes: 'true'
+  run_once: 'true'
