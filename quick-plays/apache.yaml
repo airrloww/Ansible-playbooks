@@ -1,0 +1,22 @@
+---
+- name: install apache2 and php packages
+  hosts: all
+  become: yes
+  tasks:
+    - name: install apache2 and php packages on Ubuntu and Debian
+      apt:
+        name:
+          - apache2
+          - libapache2-mod-php
+        state: latest
+        update_cache: yes
+      when: ansible_distribution in ["Debian", "Ubuntu"]
+  
+    - name: install apache and php packages on CentOS and AlmaLinux
+      dnf:
+        name:
+          - httpd
+          - php
+        state: latest
+        update_cache: yes
+      when: ansible_distribution in ["CentOS", "AlmaLinux"]

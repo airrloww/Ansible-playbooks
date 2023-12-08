@@ -1,0 +1,16 @@
+---
+- name: Update Packages
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Update package cache on Debian and Ubuntu
+      apt:
+        update_cache: yes
+      when: ansible_distribution in ["Debian", "Ubuntu"]
+
+    - name: Update package cache on CentOs and AlmaLinux
+      dnf:
+        update_cache: yes
+      when: ansible_distribution in ["CentOS", "AlmaLinux"]
+
